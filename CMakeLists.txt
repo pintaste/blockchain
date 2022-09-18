@@ -3,4 +3,4 @@ project(blockchain)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(blockchain main.cpp Block.h Blockchain.h sha256.h sha256.cpp Block.cpp Blockchain.cpp)
+add_executable(blockchain main.cpp Block.hpp Blockchain.hpp sha256.h)

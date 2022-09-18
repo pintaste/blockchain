@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Blockchain.h"
+#include "Blockchain.hpp"
 
 using namespace std;
 

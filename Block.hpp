@@ -1,14 +1,36 @@
+// Created by PIN on 2022/9/17.
+
+#ifndef BLOCKCHAIN_BLOCK_HPP
+#define BLOCKCHAIN_BLOCK_HPP
+
+#include <cstdint>
+#include <string>
+#include <vector>
+#include <iostream>
 #include <sstream>
-#include "Block.h"
 #include "sha256.h"
+
+using namespace std;
+
+class Block{
+public:
+    string sPrevHash;
+    Block(uint32_t nIndexIn, const string &sDataIn);
+    string GetHash() const;
+    void MineBlock(uint32_t nDifficulty);
+
+private:
+    uint32_t _nIndex;
+    int64_t _nNonce;
+    string _sData;
+    string _sHash;
+    time_t _tTime;
+    string _CalculateHash() const;
+};
 
 Block::Block(uint32_t nIndexIn, const string &sDataIn) : _nIndex(nIndexIn), _sData(sDataIn) {
     _nNonce = -1;
     _tTime = time(nullptr);
-}
-
-string Block::GetHash() {
-    return _sHash;
 }
 
 void Block::MineBlock(uint32_t nDifficulty) {
@@ -30,3 +52,9 @@ inline string Block::_CalculateHash() const {
     ss << _nIndex << _tTime << _sData << _nNonce << sPrevHash;
     return sha256(ss.str());
 }
+
+string Block::GetHash() const {
+    return _sHash;
+}
+
+#endif //BLOCKCHAIN_BLOCK_HPP
